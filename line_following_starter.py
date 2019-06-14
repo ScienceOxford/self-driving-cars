@@ -8,42 +8,41 @@ from microbit import *
 # Thanks to MultiWingSpan, whose code for the Bit:Bot was a great starting point
 # http://www.multiwingspan.co.uk/micro.php?page=botline
 
-LF = pin14
-LB = pin13
-RF = pin12
-RB = pin15
+LF = pin13
+LB = pin12
+RF = pin15
+RB = pin14
 
-
-# 1023 turns the motors off; 0 turns them on at full speed
+# 0 turns the motors off; 1023 turns them on at full speed
 def stop():
-    LF.write_analog(1023)
-    LB.write_analog(1023)
-    RF.write_analog(1023)
-    RB.write_analog(1023)
-    display.show(Image.ANGRY)
+    LF.write_analog(0)
+    LB.write_analog(0)
+    RF.write_analog(0)
+    RB.write_analog(0)
+    display.show(Image.DUCK)
 
 
 # Inputs between 0-1023 to control both motors
 def drive(L, R):
     # Below controls the left wheel: forward, backward, stop at given speed
     if L > 0 and L <= 1023:
-        LF.write_analog(abs(L-1023))  # go forwards at speed given
-        LB.write_analog(1023)         # don't go backwards
+        LF.write_analog(abs(L))  # go forwards at speed given
+        LB.write_analog(0)         # don't go backwards
     elif L < 0 and L >= -1023:
-        LF.write_analog(1023)         # don't go forwards
-        LB.write_analog(abs(L+1023))  # go backwards at speed given
+        LF.write_analog(0)         # don't go forwards
+        LB.write_analog(abs(L))  # go backwards at speed given
     else:
-        LF.write_analog(1023)         # stop the left wheel
-        LB.write_analog(1023)
+        LF.write_analog(0)         # stop the left wheel
+        LB.write_analog(0)
     # Below controls the right wheel: forward, backward, stop at given speed
     if R > 0 and R <= 1023:
-        RF.write_analog(abs(R-1023))  # go forwards at speed given
-        RB.write_analog(1023)         # don't go backwards
+        RF.write_analog(abs(R))  # go forwards at speed given
+        RB.write_analog(0)         # don't go backwards
     elif R < 0 and R >= -1023:
-        RF.write_analog(1023)         # don't go forwards
-        RB.write_analog(abs(R+1023))  # go backwards at speed given
+        RF.write_analog(0)         # don't go forwards
+        RB.write_analog(abs(R))  # go backwards at speed given
     else:
-        RF.write_analog(1023)         # stop the right wheel
-        RB.write_analog(1023)
+        RF.write_analog(0)         # stop the right wheel
+        RB.write_analog(0)
 
 # WRITE YOUR CODE BELOW HERE
