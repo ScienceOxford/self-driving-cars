@@ -1,5 +1,7 @@
 # self-driving-cars
-Files for the 1.5h Creative Computing Club session, Self Driving Cars
+Files for the 1.5h Creative Computing Club session, 'Self Driving Cars'
+
+Visit here for the instructions: <https://scienceoxford.github.io/self-driving-cars>
 
 Developed by ScienceOxford for educational purposes. Please give credit where applicable. 
 We love seeing what you've created, so tag us when you share! @ScienceOxford
