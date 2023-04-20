@@ -84,24 +84,17 @@ def message_check():
 
 stop()
 
-radio.config(channel=12)
+radio.config(channel=7)
 
 while True:
-    on = message_check()
+    left_sensor = pin2.read_analog()
+    right_sensor = pin1.read_analog()
+    print("left = " + str(left_sensor) + "; right = " + str(right_sensor))
 
-    while on == True:
-        on = message_check()
-
-        left_sensor = pin2.read_analog()
-        right_sensor = pin1.read_analog()
-        print("left = " + str(left_sensor) + "; right = " + str(right_sensor))
-
-        if left_sensor <= 100 and right_sensor <= 100:
-            forward(100)
-        elif left_sensor > 100:
-            left_turn(100)
-        elif right_sensor > 100:
-            right_turn(100)
-        sleep(100)
-
-    stop()
+    if left_sensor <= 100 and right_sensor <= 100:
+        forward(100)
+    elif left_sensor > 100:
+        stop()
+    elif right_sensor > 100:
+        stop()
+    sleep(100)
