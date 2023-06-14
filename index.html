@@ -17,35 +17,89 @@
   <div id="intro">
     <p>Resources for the 'Self-Driving Cars' Creative Computing Club.</p>
     <p>This page recaps what <a href="https://bit.ly/Jun23CCC" target="_blank">we discussed as a group</a>.</p>
-    <p>To skip to the advanced extensions, <a href="#radio">click here</a>.</p>
+    <p>To skip to the advanced extensions, <a href="#next">click here</a>.</p>
     <br>
   </div>
 
   <div id="starter" class="left">
     <h3>Creating your first program</h3>
-    <p>- testing the microbit with a picture - use the editor & practice downloading</p>
+    <p>Open the Python editor by visiting <a href="https://python.microbit.org/" target="_blank">python.microbit.org/</a>. Your screen will look something like this:</p>
+    <img src="https://raw.githubusercontent.com/ScienceOxford/musical-microbits/main/images/python-editor.PNG" alt="screenshot of the Python editor screen" width="800px" height="auto">
+    <br>
+    <ul>
+      <li>In the middle is where you will add your own code.</li>
+      <li>On the left-hand-side is the reference menu - you can see examples of some of the code here, as well as help understanding these examples.</li>
+      <li>On the right-hand-side is the simulator - a pretend micro:bit you can use to test your code.</li>
+      <li>On the bottom is the Send to Micro:bit button, which you will use to send code to your physical micro:bit.</li>
+    </ul>
+    <br>
+    <p>Edit the code on the screen, then flash it to your micro:bit to see the changes.</p>
+    <p>Try:</p>
+    <ul>
+        <li>Editing the image that is shown (hint: check the reference menu, under Display, for a list of images)</li>
+        <li>Changing the number in the brackets after sleep (hint: this tells the micro:bit how long to keep your image on the display)</li>
+        <li>Making the micro:bit scroll your name instead of 'Hello'</li>
+    </ul>
     <br>
   </div>
 
   <div id="buggies" class="left">
     <h3>Testing the cars</h3>
-    <p>- code set up so that they will drive forward if they're over the line, and stop if they go off it</p>
-    <p>- test your car, how far can it go before it drives off?</p>
-    <p>- edit the number in the brackets (forward(100)) to test driving for longer or shorter - what do you think works best?</p>
+    <p><a href="https://raw.githubusercontent.com/ScienceOxford/self-driving-cars/main/examples/starter-as-project.hex" target="_blank">Download the project hex file</a>, and open it in the Python editor.</p>
+    <p>This file includes a library, car.py, and the main file to write your own code in.</p>
+    <p>Send this code to the micro:bit, plug it into the car's edge connector, and test it out - how far does the car drive before stopping?</p>
+    <p>What features do you need to add to the code to make the car work properly?</p>
+    <p>Currently, the car is set to stop as soon as one of the sensors goes over the black line.</p>
     <br>
   </div>
 
   <div id="smart" class="left">
     <h3>Making them smart</h3>
-    <p>- they should be able to turn corners and keep following the lines</p>
-    <p>- elif left_sensor</p>
-    <p>- elif right_sensor</p>
-    <p>- test out your car on the roads - how well can it cope with the corners?</p>
-    <p>- reduce how far it travels before checking the sensors; reduce the speed of the car when turning...</p>
+    <p>The next step is to program the car to turn off the black line so that it can keep following the road.</p>
+    <p>IN-PERSON DEMO HERE - INFO TO BE ADDED</p>
+    <p>The Python way of writing this is:</p>
+    <pre>elif left_sensor > 100:
+    car.left_turn(500)</pre>
+    <br>
+    <p>Where the number inside the brackets is how long the car should turn for - you will need to test out your own car to find the best amount of time.</p>
+    <p>Below is the full code (replacing your current while loop), including turning left if the left sensors goes onto the line. Try it out, then add the right sensor yourself.</p>
+    <pre>while True:
+    left_sensor = pin2.read_analog()
+    right_sensor = pin1.read_analog()
+  
+    if left_sensor <= 100 and right_sensor <= 100:
+        car.forward(500)
+    elif left_sensor > 100:
+        car.left_turn(500)
+      
+    else:
+        car.stop()</pre>
+    <br>
+    <p>Test out your car on the roads - how well can it cope with the corners?</p>
     <br>
   </div>
 
-  <div id="radio" class="left">
+  <div id="next" class="left">
+    <h3>Improving your car</h3>
+    <p>Your car might not be able to cope with very tight turns - test it out on some of the winding bits of road.</p>
+    <p>To improve this, you could:</p>
+    <ul>
+      <li>Tell your car to travel for less time before checking the sensors.</li>
+      <li>Tell your car to slow down whilst turning.</li>
+    </ul>
+    <p>You can add another <strong>argument</strong> to the turn functions, so they have two numbers:</p>
+    <pre>car.left_turn(500, 750)</pre>
+    <br>
+    <ul>
+      <li>500 says turn for half a second</li>
+      <li>750 says turn at a speed of 750 - the slowest you can turn is 300, the fastest is 1023.</li>
+    </ul>
+    <p>Try out different numbers to see if you can get your car safely round the difficult bends.</p>
+    <p>Can you design your own roads to test your car on?</p>
+    <br>
+  </div>
+
+  <div hidden id="radio" class="left">
     <h3>Designing a smart road system</h3>
     <p>- this part is challenging, an extension for those who have been before</p>
     <p>- using radio to listen out for stop signals, take a 'pedestrian crossing'</p>
